@@ -57,7 +57,7 @@ namespace ExpenceTracker.Controllers
 
             return View(user);
         }
-        [HttpPost]
+      
         public  IActionResult Logout()
         {
              HttpContext.SignOutAsync();
