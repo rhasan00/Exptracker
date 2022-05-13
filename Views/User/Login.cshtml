@@ -1,0 +1,44 @@
+﻿@model ExpenceTracker.Models.User
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>ExpenceTracker-Login</title>
+     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+ 
+<div class="card w-25 text-white bg-primary mb-3">
+  <div class="card-header text-center">
+   <h4> Login</h4>
+    <h6>Username: admin && Password: 123</h6>
+    <label style="color:orange">@ViewData["msg"].ToString()</label>
+  </div>
+  <div class="card-body">
+     <form  asp-controller="User" asp-action="Login" method="post">
+          <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+  <div class="form-group">
+    <label asp-for="username" class="control-label">Username</label>
+    <input asp-for="username" type="text" class="form-control" placeholder="Enter username" required>
+    <span asp-validation-for="username" class="text-danger"></span>
+  </div>
+  <div class="form-group">
+    <label asp-for="password">Password</label>
+    <input asp-for="password" type="password" class="form-control" placeholder="Password" required>
+     <span asp-validation-for="password" class="text-danger"></span>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+  </div>
+  
+</div>
+
+</body>
+</html>

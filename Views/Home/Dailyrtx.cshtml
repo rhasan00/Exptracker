@@ -1,0 +1,46 @@
+﻿@model IEnumerable<ExpenceTracker.Models.Transaction>
+@{
+    ViewData["Title"] = "Dailyrtx";
+}
+
+<div class="text-center">
+    <h6 class="display-4">Expence with catagory</h6>
+     <label style="color:red">@if(TempData["msg"]!=null) @TempData["msg"].ToString()</label>
+     <div class="panel-body">
+            <table class="table table-bordered">
+               <tr>
+                   <th>Sl</th>
+                   <th>Date</th>
+                   <th>Transaction No</th>
+                   <th>Remarks of expense</th>
+                   <th>Dp Balance</th>
+                   <th>Balance</th>
+                  
+               </tr>
+               
+                    @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i }))
+            {
+                int ind = item.Index + 1;
+                <tr>
+                         <td>@ind</td>
+                          <td > @Html.DisplayFor(modelItem => item.Data.trxdate)</td>   
+                          <td>
+                               @Html.DisplayFor(modelItem => item.Data.trxno) </td>
+                          <td style="text-align:left">
+                             @Html.DisplayFor(modelItem => item.Data.remarks)
+                              </td>
+                               <td style="text-align:right">
+                               @Html.DisplayFor(modelItem => item.Data.debit)
+                           </td>
+                          <td style="text-align:right">
+                               @Html.DisplayFor(modelItem => item.Data.credit)
+                           </td>
+                   
+                   
+                    </tr> 
+                                       
+                    }
+                </table>
+
+        </div>
+

@@ -1,0 +1,33 @@
+﻿@model  IEnumerable<ExpenceTracker.Models.Accountshead>
+@{
+    ViewData["Title"] = "Cash";
+}
+
+<div class="card w-75  mb-3">
+  <div class="card-header text-center">
+   <h4> Add expense</h4>
+    
+    <label style="color:orange">@if(TempData["msg"]!=null) @TempData["msg"].ToString()</label>
+  </div>
+  <div class="card-body">
+     <form  asp-controller="Home" asp-action="Addcash" method="post">
+          <div validation-summary="ModelOnly" class="text-danger"></div>
+  <div class="form-group">
+    <label for="accid" class="control-label">Cash/Bank</label>
+    <select name="accid" type="text" class="form-control" asp-items="@(new SelectList(Model,"accid","expence"))">
+
+    </select>
+    <span validation-for="accid" class="text-danger"></span>
+  </div>
+  
+  <div class="form-group">
+    <label for="amount">Amount</label>
+    <input name="amount" class="form-control" required placeholder="Amount"/>
+     <span validation-for="amount" class="text-danger"></span>
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+  </div>
+</div>
+

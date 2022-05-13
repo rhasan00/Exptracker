@@ -1,0 +1,87 @@
+﻿@model IEnumerable<ExpenceTracker.Models.HeadModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h6 class="display-4">Expence with catagory</h6>
+     <label style="color:red">@if(TempData["msg"]!=null) @TempData["msg"].ToString()</label>
+     <div class="panel-body">
+            <table class="table table-bordered">
+               <tr>
+                   <th>Sl</th>
+                   <th>Expense</th>
+                   <th>Code</th>
+                   <th>Balance</th>
+                   <th>Action</th>
+               </tr>
+               
+                    @foreach (var item in Model.Select((x, i) => new { Data = x, Index = i }))
+            {
+                int ind = item.Index + 1;
+                <tr>
+                         <td>@ind</td>
+                 
+                    @if (item.Data.ishead==true)
+                    {
+                        
+                          <th style="text-align:left"><img src=img/child.png> @Html.DisplayFor(modelItem => item.Data.headname)</th>   
+                          <th>
+                               @Html.DisplayFor(modelItem => item.Data.code) </th>
+                          <th> </th>
+                          <td>
+                              <button class="btn-success"  onclick="openExpmodal(@item.Data.accid,'@item.Data.headname')">
+                              <i class="fa fa-plus" aria-hidden="true">+</i></button>
+                           </td>
+                   
+                    }
+                    else
+                    { 
+                        
+                          <td style="text-align:left;padding-left:35px"><img src=img/base.png> @Html.DisplayFor(modelItem => item.Data.headname)</td>   
+                          <td> @Html.DisplayFor(modelItem => item.Data.code) </td>
+                          <td>  </td>
+                          <td></td>
+                    } 
+                    </tr> 
+                                       
+                    }
+                </table>
+
+        </div>
+   
+</div>
+<div class="modal fade" id="createExpence" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create expense head</h5>
+       
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <form asp-controller="Home" asp-action="Expensehead">
+      <div class="modal-body">
+        
+          <div class="form-group">
+              <div class="form-group">
+            <label for="message-text" class="col-form-label">Base name:</label>
+            <input name="catid" type="hidden" id="catid" />
+            <input  class="form-control" id="catagory" disabled/>
+          </div>
+            <label for="recipient-name" class="col-form-label">Name:</label>
+            <input name="expence" type="text" class="form-control" id="recipient-name">
+          </div>
+         
+       
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </div>
+       </form>
+    </div>
+  </div>
+</div>
+ 
